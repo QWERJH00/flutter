@@ -63,11 +63,14 @@ class _Page1State extends State<Page1> {
                       Offset(-1.0, 0.0) : 좌측에서 나옴
                     */
                     var begin = const Offset(0.0, -1.0);
-                    var end = Offset.zero;
+                    var end = Offset.zero;  // Offset(0.0, 0.0)와 동일함
                     var curve = Curves.elasticInOut;  // 교안 참조
+                    // Tween을 사용하여 Aimation을 Animation으로 변환
                     var tween = Tween(begin: begin, end: end)
                                       .chain(CurveTween(curve: curve));
                     var offsetAnimation = animation.drive(tween);
+                    // SlideTransition은 Animation<Offset>을 가져와서
+                    // 애니메이션 값이 변경될 때마다 자식을 변환합니다.
                     return SlideTransition(
                       position: offsetAnimation,
                       child: child,
